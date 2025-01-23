@@ -6,6 +6,7 @@ import Hero from "./_components/Hero";
 import NewFormDialog from "./_components/NewFormDialog";
 import { useEffect } from "react";
 import { getAllTemplates } from "@/service/formBuilder";
+import FormTemplatesGallery from "./_components/FormTemplatesGallery";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -26,7 +27,10 @@ export default function Home() {
             <NewFormDialog />
           </div>
         </div>
-        {JSON.stringify(allFormTemplates)}
+
+        <div>
+          <FormTemplatesGallery allFormTemplates={allFormTemplates} />
+        </div>
       </div>
     </>
   );
