@@ -3,9 +3,9 @@ import React from 'react';
 const Hero = () => {
 	return (
 		<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32">
-			<p className="mx-auto -mt-4 max-w-2xl sm:text-2xl tracking-tight text-slate-700 sm:mt-6">
+			<p className="mx-auto -mt-4 max-w-2xl sm:text-2xl tracking-tight text-slate-400 sm:mt-6">
 				Welcome to{' '}
-				<span className="border-b border-dotted font-bold border-slate-300">
+				<span className="border-b border-dotted  border-slate-300 text-slate-700">
 					Form Builder
 				</span>
 			</p>
@@ -28,12 +28,12 @@ const Hero = () => {
 				<span className="inline-block">Faster, Smarter!</span>
 			</h1>
 
-			<p className="mx-auto mt-9 max-w-5xl tracking-tight text-slate-700 sm:mt-6">
-				<span className="inline-block">
+			<p className="mx-auto mt-9 max-w-5xl tracking-tight sm:mt-6">
+				<span className="inline-block text-slate-400">
 					Effortlessly create, customize, and share forms to collect data,
 					streamline workflows, and enhance user experiences
 				</span>
-				<span className="inline-block">
+				<span className="inline-block text-slate-700">
 					— all without writing a single line of code.
 				</span>
 			</p>
