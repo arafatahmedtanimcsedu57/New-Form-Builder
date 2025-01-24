@@ -1,5 +1,9 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { addFormTemplate, getAllTemplates } from "@/service/formBuilder";
+import {
+  addFormTemplate,
+  getAllTemplates,
+  getTemplate,
+} from "@/service/formBuilder";
 import type { TemplateType } from "@/types/formTemplate.types";
 
 const slice = createSlice({
@@ -18,6 +22,13 @@ const slice = createSlice({
       addFormTemplate.fulfilled,
       (state, { payload }: PayloadAction<TemplateType>) => {
         state.allTemplates.push(payload);
+      }
+    );
+
+    builder.addCase(
+      getTemplate.fulfilled,
+      (state, { payload }: PayloadAction<TemplateType>) => {
+        state.selectedTemplate = payload;
       }
     );
 

@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html lang="en">
       <body>
         <Providers>
           <main className="container w-full m-auto px-4 py-10">{children}</main>
