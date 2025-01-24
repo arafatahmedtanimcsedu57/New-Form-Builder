@@ -1,56 +1,82 @@
-import React from "react";
-import { useDrag } from "react-dnd";
+'user client';
 
-import type { FormLayoutComponentChildrenType, FormLayoutComponentContainerType } from "@/types/formTemplate.types";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import React from 'react';
+import { useDrag } from 'react-dnd';
+import { IconDotsVertical, IconCirclePlus } from '@tabler/icons-react';
+
+import type {
+	FormLayoutComponentChildrenType,
+	FormLayoutComponentContainerType,
+	FormLayoutComponentsType,
+} from '@/types/formTemplate.types';
+import { FORM_COMPONENTS } from '@/constant/form-entites';
 
 interface FormEntityProps {
-  entity?: FormLayoutComponentChildrenType;
+	entity: FormLayoutComponentChildrenType | FormLayoutComponentContainerType;
+	currentFormTemplate: FormLayoutComponentsType[] | [];
+
+	handleEntityAdded: (
+		entity: FormLayoutComponentChildrenType | FormLayoutComponentContainerType,
+		pageId?: string,
+	) => void;
 }
 
-function FormEntity({ entity }: FormEntityProps) {
-  const [{ isDragging }, drag] = useDrag(
-    () => ({
-      type: entity?.itemType,
-      item: entity,
-      end: (
-        item: FormLayoutComponentChildrenType,
-        monitor: any
-      ) => {
-        const dropResult: FormLayoutComponentContainerType =
-          monitor.getDropResult();
-        if (item && dropResult) {
-        //   if (item.itemType === "container") {
-        //     handleItemAdded(item);
-        //   } else if (item.itemType === "control") {
-        //     handleItemAdded(item, dropResult.id);
-            //   }
-            
-            console.log(item.category)
-        }
-      },
-      collect: (monitor: any) => ({
-        isDragging: monitor.isDragging(),
-        handlerId: monitor.getHandlerId(),
-      }),
-    }),
-    []
-  );
+function FormEntity({
+	entity,
+	currentFormTemplate,
+	handleEntityAdded,
+}: FormEntityProps) {
+	const [{ isDragging }, drag] = useDrag(
+		() => ({
+			type: entity.itemType,
+			item: entity,
+			end: (
+				item:
+					| FormLayoutComponentChildrenType
+					| FormLayoutComponentContainerType,
+				monitor: any,
+			) => {
+				console.log('End:', entity);
+				const dropResult: FormLayoutComponentContainerType =
+					monitor.getDropResult();
+				console.log('Drop:', dropResult);
+				if (item && dropResult) {
+					if (item.itemType === FORM_COMPONENTS.CONTAINER) {
+						handleEntityAdded(entity);
+					} else if (entity.itemType === FORM_COMPONENTS.CONTROL) {
+						handleEntityAdded(entity, dropResult.id);
+					}
+				}
+			},
+			collect: (monitor) => ({
+				isDragging: !!monitor.isDragging(),
+				handlerId: monitor.getHandlerId(),
+			}),
+		}),
+		[currentFormTemplate],
+	);
 
-  const opacity = isDragging ? 0.4 : 1;
+	const opacity = isDragging ? 0.4 : 1;
 
-  return (
-    <div ref={drag} style={{ opacity, cursor: "move" }} className="col-12">
-      <div className="bg-white text-nowrap px-2 py-2 border w-10 h-100 d-flex align-items-center justify-content-between gap-2 rounded-3">
-        <div className="d-flex align-items-center">
-          <ThreeDotsVertical width="16" height="16" />
-          <div className="fs-7">{item.displayText}</div>
-        </div>
-        <div className="bg-light p-2 rounded">
-          <Plus width="16" height="16" />
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div
+			ref={drag as unknown as React.Ref<HTMLDivElement>}
+			style={{ opacity, cursor: 'move' }}
+			className="p-4 border rounded-lg"
+		>
+			<div className="flex justify-between items-center text-slate-600 ">
+				<div className="flex items-center gap-2">
+					<IconDotsVertical width="16" height="16" stroke={4} />
+					<div className="tracking-wide">{entity.displayText}</div>
+				</div>
+				<div className="text-slate-500">
+					<IconCirclePlus stroke={1} />
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default FormEntity;
