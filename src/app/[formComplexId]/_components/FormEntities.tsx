@@ -19,7 +19,7 @@ function FormEntities({
 	) => void;
 }) {
 	return (
-		<div className="bg-white border-e-2 h-full overflow-auto min-w-[300px] max-w-[300px]">
+		<div className="bg-white border-e-2 h-full overflow-auto min-w-[400px] max-w-[400px]">
 			<h5 className="p-4 m-0 flex items-center text-lg">Form Components</h5>
 
 			<div className="p-4 border-b-2">

@@ -145,7 +145,7 @@ function FormComponent({
 									<span className="">Drop Field</span>
 								</div>
 							) : (
-								<>
+								<div className="flex flex-col w-full">
 									{_children?.map((child, ind) => {
 										return (
 											<ControlViewComponent
@@ -171,7 +171,7 @@ function FormComponent({
 											/>
 										);
 									})}
-								</>
+								</div>
 							)}
 						</div>
 					</div>

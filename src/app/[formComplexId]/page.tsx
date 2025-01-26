@@ -32,7 +32,7 @@ const FormPlayground = () => {
 	return (
 		<div className="flex flex-col h-full">
 			<DndProvider backend={HTML5Backend}>
-				<div className="flex flex-row gap-4 justify-between w-full h-full">
+				<div className="flex flex-row gap-4 w-full h-full">
 					{/* Left Side */}
 					<FormEntities
 						currentFormTemplate={formComponents}

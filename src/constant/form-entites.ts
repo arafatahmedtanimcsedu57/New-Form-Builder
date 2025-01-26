@@ -1,12 +1,14 @@
 import { generateID } from '@/lib/common';
 
 export const FORM_ENTITIES_NAME = {
-	STEPCONTAINER: 'step-container',
+	BLOCK: 'page',
+
 	INPUTTEXTFIELD: 'text-field',
 	INPUTMULTILINE: 'multiline-text-field',
-	CHECKBOX: 'checkbox',
 	RADIOGROUP: 'radio-group',
 	SELECTDROPDOWN: 'select-drop-down',
+
+	CHECKBOX: 'checkbox',
 	DATEFIELD: 'date-field',
 	TIMEFIELD: 'time-field',
 	FILEUPLOAD: 'file-upload',
@@ -32,11 +34,11 @@ export const FORM_STATUS = {
 
 export const FORM_PAGE = [
 	{
-		id: FORM_ENTITIES_NAME.SELECTDROPDOWN,
-		controlName: FORM_ENTITIES_NAME.STEPCONTAINER,
+		id: FORM_ENTITIES_NAME.BLOCK,
+		controlName: FORM_ENTITIES_NAME.BLOCK,
 		displayText: 'Block',
+		description: 'Form Page',
 		itemType: FORM_COMPONENTS.CONTAINER,
-		icon: 'bi bi-building',
 		heading: 'Block Name',
 		subHeading: 'Block Text (optional)',
 		skipAble: false,
@@ -45,41 +47,63 @@ export const FORM_PAGE = [
 ];
 
 export const FORM_ENTITIES = [
+	// Input
 	{
-		id: FORM_ENTITIES_NAME.FILEUPLOAD,
-		controlName: FORM_ENTITIES_NAME.FILEUPLOAD,
-		displayText: 'Upload',
-		description: 'Some Description about the field',
-		labelName: 'Label for File Upload',
+		id: FORM_ENTITIES_NAME.INPUTTEXTFIELD,
+		controlName: FORM_ENTITIES_NAME.INPUTTEXTFIELD,
+		displayText: 'Input Field',
+		description:
+			'Displays a form input field or a component that looks like an input field.',
+		labelName: 'Input Field',
 		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'fas fa-cloud-upload-alt',
+		dataType: 'text',
 		required: false,
-		category: 'media-elements',
+		category: 'text-elements',
 		containerId: '',
-		placeholder: 'Placeholder for File Upload',
-		name: 'File Upload',
+		placeholder: 'Placeholder for Input Field',
+		name: 'Text Field',
 		sequence: 0,
 	},
+
+	// Textarea
+	{
+		id: FORM_ENTITIES_NAME.INPUTMULTILINE,
+		controlName: FORM_ENTITIES_NAME.INPUTMULTILINE,
+		displayText: 'Text Field',
+		description:
+			'Displays a form textarea or a component that looks like a textarea.',
+		labelName: 'Text Field',
+		itemType: FORM_COMPONENTS.CONTROL,
+		dataType: 'text',
+		required: false,
+		category: 'text-elements',
+		containerId: '',
+		placeholder: 'Placeholder for Text Field',
+		name: 'Text Field',
+		sequence: 0,
+	},
+
+	//Radio
 	{
 		id: FORM_ENTITIES_NAME.RADIOGROUP,
 		controlName: FORM_ENTITIES_NAME.RADIOGROUP,
 		displayText: 'Radio',
-		description: 'Some Description about the field',
+		description:
+			'A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.',
 		labelName: 'Label for Radio',
 		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'bi bi-dot-circle',
 		required: false,
-		category: 'other-elements',
+		category: 'choose-elements',
 		items: [
 			{
 				id: generateID(),
-				value: 'Button__-1',
-				label: 'Button 1',
+				value: 'radio-option-1',
+				label: 'Radio Option 1',
 			},
 			{
 				id: generateID(),
-				value: 'Button__-2',
-				label: 'Button 2',
+				value: 'radio-option-2',
+				label: 'Radio Option 2',
 			},
 		],
 
@@ -89,32 +113,15 @@ export const FORM_ENTITIES = [
 		sequence: 0,
 	},
 
-	{
-		id: FORM_ENTITIES_NAME.INPUTTEXTFIELD,
-		controlName: FORM_ENTITIES_NAME.INPUTTEXTFIELD,
-		displayText: 'Text Field',
-		description: 'Some Description about the field',
-		labelName: 'Text Field',
-		itemType: FORM_COMPONENTS.CONTROL,
-		dataType: 'text',
-		icon: 'fas fa-text-height',
-		required: false,
-		category: 'text-elements',
-
-		containerId: '',
-		placeholder: 'Placeholder for Text Field',
-		name: 'Text Field',
-		sequence: 0,
-	},
-
+	//Select
 	{
 		id: FORM_ENTITIES_NAME.SELECTDROPDOWN,
 		controlName: FORM_ENTITIES_NAME.SELECTDROPDOWN,
-		displayText: 'Dropdown',
-		description: 'Some Description about the field',
-		labelName: 'Label for Dropdown',
+		displayText: 'Select',
+		description:
+			'Displays a list of options for the user to pick from—triggered by a button.',
+		labelName: 'Label for Select',
 		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'bi bi-caret-square-down',
 		required: false,
 		items: [
 			{
@@ -128,103 +135,28 @@ export const FORM_ENTITIES = [
 				label: 'Option 2',
 			},
 		],
-		category: 'other-elements',
-
+		category: 'select-elements',
 		containerId: '',
 		placeholder: 'Placeholder for Select',
 		name: 'Dropdown',
 		sequence: 0,
 	},
-	// PHONE
-	{
-		id: FORM_ENTITIES_NAME.DATEFIELD,
-		controlName: FORM_ENTITIES_NAME.DATEFIELD,
-		displayText: 'Date Picker',
-		description: 'Some Description about the field',
-		labelName: 'Label for Date',
-		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'bi bi-calendar',
-		required: false,
-		category: 'date-elements',
 
-		containerId: '',
-		name: 'Date Field',
-		placeholder: 'Placeholder for Date Field',
-		sequence: 0,
-	},
-	// MULTISELECT
-	{
-		id: FORM_ENTITIES_NAME.IMAGEUPLOAD,
-		controlName: FORM_ENTITIES_NAME.IMAGEUPLOAD,
-		displayText: 'Image',
-		description: 'Some Description about the field',
-		labelName: 'Label for Image Upload',
-		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'bi bi-image',
-		required: false,
-		category: 'media-elements',
-		containerId: '',
-		name: 'Image Upload',
-		placeholder: 'Placeholder for Image Upload',
-		sequence: 0,
-	},
-	{
-		id: FORM_ENTITIES_NAME.SIGNATURE,
-		controlName: FORM_ENTITIES_NAME.SIGNATURE,
-		displayText: 'Signature',
-		description: 'Some Description about the field',
-		labelName: 'Label for Signature',
-		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'fa fa-signature',
-		required: false,
-		category: 'other-elements',
-		containerId: '',
-		name: 'Signature Field',
-		sequence: 0,
-		placeholder: 'Placeholder for Signature',
-	},
-
+	// Checkbox
 	{
 		id: FORM_ENTITIES_NAME.CHECKBOX,
 		controlName: FORM_ENTITIES_NAME.CHECKBOX,
-		displayText: 'Check Box',
-		description: 'Some Description about the field',
-		labelName: 'Label for Checkbox',
+		displayText: 'Checkbox',
+		description:
+			'A control that allows the user to toggle between checked and not checked.',
+		labelName: 'Checkbox',
 		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'bi bi-check-square',
+		dataType: 'boolean',
 		required: false,
-		category: 'other-elements',
-		items: [
-			{
-				id: generateID(),
-				value: 'Button__-1',
-				label: 'Button 1',
-			},
-			{
-				id: generateID(),
-				value: 'Button__-2',
-				label: 'Button 2',
-			},
-		],
+		category: 'boolean-elements',
 		containerId: '',
+		placeholder: 'Placeholder for Checkbox',
 		name: 'Checkbox',
 		sequence: 0,
-		placeholder: 'Place Holder Checkbox',
-	},
-
-	{
-		id: FORM_ENTITIES_NAME.INFORMATION,
-		controlName: FORM_ENTITIES_NAME.INFORMATION,
-		displayText: 'Title/Paragraph Text',
-		description: 'Some Description about the field',
-		labelName: 'Label for information',
-		itemType: FORM_COMPONENTS.CONTROL,
-		icon: 'bi bi-check-square',
-		required: false,
-		category: 'other-elements',
-		containerId: '',
-		name: 'information',
-		sequence: 0,
-		placeholder: 'Place Holder Information',
 	},
 ];

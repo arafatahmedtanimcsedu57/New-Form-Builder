@@ -66,10 +66,17 @@ function FormEntity({
 			style={{ opacity, cursor: 'move' }}
 			className="p-4 border rounded-lg"
 		>
-			<div className="flex justify-between items-center text-slate-600 ">
-				<div className="flex items-center gap-2">
-					<IconDotsVertical width="16" height="16" stroke={4} />
-					<div className="tracking-wide">{entity.displayText}</div>
+			<div className="flex gap-4 items-center justify-between text-slate-600 ">
+				<div className="flex gap-4 items-center">
+					<div className="flex items-center gap-2">
+						<IconDotsVertical width="16" height="16" stroke={4} />
+					</div>
+					<div>
+						<span className="block tracking-wide font-semibold">
+							{entity.displayText}
+						</span>
+						<span className="text-sm">{entity.description}</span>
+					</div>
 				</div>
 				<div className="text-slate-500">
 					<IconCirclePlus stroke={1} />

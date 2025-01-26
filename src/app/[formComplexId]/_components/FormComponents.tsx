@@ -48,7 +48,7 @@ function FormComponents({
 
 	console.log('formComponents', currentFormTemplate, formComponents);
 	return (
-		<div className="mt-3 overflow-auto flex-1 h-full">
+		<div className="mt-3 overflow-auto flex-1 h-full min-w-[300px] max-w-[500px]">
 			{formComponents && formComponents.length ? (
 				formComponents.map((component: FormLayoutComponentsType) => {
 					const { container: page, children } = component || {};

@@ -2,11 +2,25 @@ import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import type { Identifier } from 'dnd-core';
 
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+
 import { FORM_COMPONENTS, FORM_ENTITIES_NAME } from '@/constant/form-entites';
 import {
 	FormLayoutComponentChildrenType,
 	type FormLayoutComponentContainerType,
 } from '@/types/formTemplate.types';
+import { Label } from '@/components/ui/label';
 
 const selectedColor = '#ffc107';
 const nonSelectedColor = 'rgba(0,0,0,0.1)';
@@ -14,21 +28,60 @@ const nonSelectedColor = 'rgba(0,0,0,0.1)';
 const renderItem = (item: FormLayoutComponentChildrenType) => {
 	switch (item.controlName) {
 		case FORM_ENTITIES_NAME.INPUTTEXTFIELD:
-			return <>TextField</>;
+			return <Input type={item.dataType} placeholder={item.placeholder} />;
 
 		case FORM_ENTITIES_NAME.INPUTMULTILINE:
-			return <>TextField</>;
+			return <Textarea placeholder={item.placeholder} />;
+
+		case FORM_ENTITIES_NAME.RADIOGROUP:
+			return (
+				<RadioGroup defaultValue="comfortable">
+					{item.items?.map((option) => {
+						return (
+							<div key={option.id} className="flex items-center space-x-2">
+								<RadioGroupItem value={option.value} id={option.id} />
+								<Label htmlFor={option.id}>{option.label}</Label>
+							</div>
+						);
+					})}
+				</RadioGroup>
+			);
+
+		case FORM_ENTITIES_NAME.SELECTDROPDOWN:
+			return (
+				<Select>
+					<SelectTrigger>
+						<SelectValue placeholder={item.placeholder} />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							{item.items?.map((option) => {
+								return (
+									<SelectItem key={option.id} value={option.value}>
+										{option.label}
+									</SelectItem>
+								);
+							})}
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+			);
+
 		case FORM_ENTITIES_NAME.CHECKBOX:
-			return <>CheckBox</>;
+			return (
+				<div className="flex items-center space-x-2">
+					<Checkbox id={item.name} />
+					<label
+						htmlFor={item.name}
+						className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						{item.placeholder}
+					</label>
+				</div>
+			);
 
 		case FORM_ENTITIES_NAME.MULTICHOICES:
 			return <>MULTICHOCE</>;
-
-		case FORM_ENTITIES_NAME.RADIOGROUP:
-			return <>RADIOGROUP</>;
-
-		case FORM_ENTITIES_NAME.SELECTDROPDOWN:
-			return <>SELECTDROPDOWN</>;
 
 		case FORM_ENTITIES_NAME.DATEFIELD:
 			return <>DATEFIELD</>;
@@ -73,7 +126,6 @@ const renderItem = (item: FormLayoutComponentChildrenType) => {
 		case FORM_ENTITIES_NAME.SCANCODE:
 			return (
 				<>
-					ffc107
 					<input
 						style={{ display: 'none' }}
 						id={item.controlName + item.id}
@@ -236,17 +288,16 @@ function ControlViewComponent(props: ControlViewComponentProps) {
 	const opacity = isDragging ? 0 : 1;
 	drag(drop(ref));
 
-	console.log(ref);
 	return (
 		<>
 			<div
 				ref={ref}
-				className="row w-100 align-items-stretch justify-content-end px-2 py-4"
+				className="flex w-full p-4"
 				onClick={() => selectEntity(entity)}
 				style={{ ...wrapperStyle, opacity }}
 			>
-				<div className="col-12">
-					<div className="d-flex flex-wrap align-items-center justify-content-between gap-2">
+				<div className="flex-1">
+					<div className="flex flex-wrap items-center justify-between gap-2">
 						<div>
 							<h5 className="fs-6">
 								{entity.labelName}{' '}

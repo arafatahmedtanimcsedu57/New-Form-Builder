@@ -18,10 +18,10 @@ const NewFormDialog = () => {
 	const closeDialog = () => setOpen(false);
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen} >
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<div>
-					<Button className="text-white text-sm font-medium bg-blue-600 shadow-lg hover:shadow-none rounded-3xl">
+					<Button className="text-white text-sm font-medium bg-blue-600 shadow-lg hover:shadow-none rounded-3xl hover:motion-scale-in-125 motion-ease-spring-bouncier">
 						Let&apos;s Create New Form
 					</Button>
 				</div>
