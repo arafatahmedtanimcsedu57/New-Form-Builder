@@ -8,6 +8,7 @@ import type {
   FormLayoutComponentChildrenType,
   FormLayoutComponentContainerType,
 } from "@/types/formTemplate.types";
+import { IconTrash } from "@tabler/icons-react";
 
 interface FormComponentProps {
   name?: string;
@@ -122,18 +123,25 @@ function FormComponent({
         <>
           <div
             onClick={() => (selectEntity ? selectEntity(page) : null)}
-            className="flex flex-wrap gap-4 justify-between items-center p-4 border-b-2"
+            className="flex flex-wrap gap-4 justify-between items-center p-4 border-b border-dashed"
             style={{ cursor: "pointer" }}
           >
             <div>
-              <h5>{(page as FormLayoutComponentContainerType)?.heading}</h5>
-              <p className="m-0">
+              <h5 className="text-lg text-slate-600 font-semibold">
+                {(page as FormLayoutComponentContainerType)?.heading}
+              </h5>
+              <p className="text-sm text-slate-500">
                 {(page as FormLayoutComponentContainerType)?.subHeading}
               </p>
             </div>
             <div className="d-flex gap-2 align-items-center">
-              <Button className="" onClick={handleDeleteContainer}>
-                Delete
+              <Button
+                size="sm"
+                variant="destructive"
+                className="px-2 rounded-3xl"
+                onClick={handleDeleteContainer}
+              >
+                <IconTrash />
               </Button>
             </div>
           </div>
